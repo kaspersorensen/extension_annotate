@@ -8,13 +8,13 @@ import org.datacleaner.result.AnnotatedRowsResult;
 import org.datacleaner.storage.RowAnnotation;
 import org.datacleaner.storage.RowAnnotationFactory;
 
-@Description("Annotated rows")
-@Distributed(reducer = AnnotateRowsAnalyzerResultReducer.class)
-public class AnnotateRowsAnalyzerResult extends AnnotatedRowsResult {
+@Description("Marked rows")
+@Distributed(reducer = MarkRowsAnalyzerResultReducer.class)
+public class MarkRowsAnalyzerResult extends AnnotatedRowsResult {
 
     private static final long serialVersionUID = 1L;
 
-    public AnnotateRowsAnalyzerResult(RowAnnotation annotation, RowAnnotationFactory annotationFactory,
+    public MarkRowsAnalyzerResult(RowAnnotation annotation, RowAnnotationFactory annotationFactory,
             InputColumn<?>[] highlightedColumns) {
         super(annotation, annotationFactory, highlightedColumns);
     }

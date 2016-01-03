@@ -14,28 +14,28 @@ import org.datacleaner.storage.RowAnnotation;
 import org.datacleaner.storage.RowAnnotationFactory;
 import org.junit.Test;
 
-public class AnnotateRowsAnalyzerResultReducerTest {
+public class MarkRowsAnalyzerResultReducerTest {
 
-    private final AnnotateRowsAnalyzerResultReducer reducer = new AnnotateRowsAnalyzerResultReducer();
+    private final MarkRowsAnalyzerResultReducer reducer = new MarkRowsAnalyzerResultReducer();
 
     @Test
     public void testReduceNone() throws Exception {
-        final AnnotateRowsAnalyzerResult result = reducer.reduce(Collections.<AnnotateRowsAnalyzerResult> emptyList());
+        final MarkRowsAnalyzerResult result = reducer.reduce(Collections.<MarkRowsAnalyzerResult> emptyList());
         assertEquals(0, result.getTotalRowCount());
         assertTrue(result.getSampleRows().isEmpty());
     }
 
     @Test
     public void testReduceSums() throws Exception {
-        final AnnotateRowsAnalyzerResult result1 = createResult();
-        final AnnotateRowsAnalyzerResult result2 = createResult();
+        final MarkRowsAnalyzerResult result1 = createResult();
+        final MarkRowsAnalyzerResult result2 = createResult();
 
-        final AnnotateRowsAnalyzerResult result = reducer.reduce(Arrays.asList(result1, result2));
+        final MarkRowsAnalyzerResult result = reducer.reduce(Arrays.asList(result1, result2));
         assertEquals(2, result.getAnnotatedRowCount());
         assertTrue(result.getSampleRows().isEmpty());
     }
 
-    private AnnotateRowsAnalyzerResult createResult() {
+    private MarkRowsAnalyzerResult createResult() {
         final RowAnnotationFactory annotationFactory = new InMemoryRowAnnotationFactory2();
         final RowAnnotation annotation = annotationFactory.createAnnotation();
         final InputColumn<?> col1 = new MockInputColumn<String>("foo");
@@ -44,6 +44,6 @@ public class AnnotateRowsAnalyzerResultReducerTest {
 
         annotationFactory.annotate(new MockInputRow().put(col1, "hello world").put(col2, 42), annotation);
 
-        return new AnnotateRowsAnalyzerResult(annotation, annotationFactory, highlightedColumns);
+        return new MarkRowsAnalyzerResult(annotation, annotationFactory, highlightedColumns);
     }
 }
